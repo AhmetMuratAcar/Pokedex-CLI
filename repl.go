@@ -3,9 +3,26 @@ package main
 import (
 	"strings"
 	"unicode"
+	"bufio"
+	"os"
+	"fmt"
 )
 
-func cleanInput (text string) []string {
+func startRepl() {
+	scanner := bufio.NewScanner(os.Stdin)
+
+	for {
+		fmt.Print("Pokedex > ")
+
+		if scanner.Scan() {
+			text := scanner.Text()
+			formattedInput := cleanInput(text)
+			fmt.Println("Your command was:", formattedInput[0])
+		}
+	}
+}
+
+func cleanInput(text string) []string {
 	var list []string
 	var newWord string
 	lowerStr := strings.ToLower(text)
